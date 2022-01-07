@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SplashViewToPresenter: AnyObject{
-    
+    func navigateToMoviesList()
 }
 
 protocol SplashPresenterToView: AnyObject{
@@ -20,7 +20,7 @@ protocol SplashPresenterToInteractor: AnyObject{
 }
 
 protocol SplashPresenterToRouter: AnyObject{
-    
+    func presentMoviesListModule()
 }
 
 protocol SplashInteractorToPresenter: AnyObject{

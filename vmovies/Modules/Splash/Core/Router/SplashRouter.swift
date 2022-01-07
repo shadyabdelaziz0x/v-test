@@ -19,4 +19,13 @@ class SplashRouter {
 // MARK:- SplashPresenterToRouter
 extension SplashRouter: SplashPresenterToRouter {
 
+    func presentMoviesListModule() {
+        let moviesListView = MoviesListBuilder().build()
+        let navigationController = UINavigationController(rootViewController: moviesListView)
+        navigationController.isNavigationBarHidden = true
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+        }
+    }
 }

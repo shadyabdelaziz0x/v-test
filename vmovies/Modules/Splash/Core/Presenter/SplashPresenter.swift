@@ -21,6 +21,9 @@ class SplashPresenter {
 
 // MARK:- SplashViewToPresenter
 extension SplashPresenter: SplashViewToPresenter {
+    func navigateToMoviesList() {
+        router.presentMoviesListModule()
+    }
 }
 
 // MARK:- SplashInteractorToPresenter
