@@ -8,7 +8,8 @@
 import Foundation
 
 protocol MoviesListViewToPresenter: AnyObject{
-    
+    var moviesCount: Int { get }
+    func getMovie(for index: Int) -> Movie?
 }
 
 protocol MoviesListPresenterToView: AnyObject{

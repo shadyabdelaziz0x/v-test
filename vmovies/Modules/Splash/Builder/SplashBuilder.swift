@@ -20,7 +20,7 @@ class SplashBuilder : SplashProtocol {
     
     func build() -> UIViewController {
         do {
-            registrInteractor()
+            registrInteractor(apiClient: APIClient.shared)
             try registerView()
             registerRouter(splashViewController: view)
             registerPresenter()
@@ -33,8 +33,8 @@ class SplashBuilder : SplashProtocol {
     }
     
     
-    private func registrInteractor() {
-        self.interactor = SplashInteractor()
+    private func registrInteractor(apiClient: APIClientProtocol) {
+        self.interactor = SplashInteractor(apiClient: apiClient)
     }
     
     private func registerView() throws {

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SplashViewToPresenter: AnyObject{
-    func navigateToMoviesList()
+    func viewDidLoad()
 }
 
 protocol SplashPresenterToView: AnyObject{
@@ -16,13 +16,13 @@ protocol SplashPresenterToView: AnyObject{
 }
 
 protocol SplashPresenterToInteractor: AnyObject{
-    
+    func fetchMovies()
 }
 
 protocol SplashPresenterToRouter: AnyObject{
-    func presentMoviesListModule()
+    func presentMoviesListModule(initialMovies: [Movie]?)
 }
 
 protocol SplashInteractorToPresenter: AnyObject{
-
+    func fetchMoviesDidFinish(status: FetchFromApiStatus)
 }

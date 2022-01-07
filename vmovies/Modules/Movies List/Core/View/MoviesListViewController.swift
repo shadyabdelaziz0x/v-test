@@ -14,7 +14,6 @@ class MoviesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("HERERE")
     }
 
 }
@@ -29,24 +28,27 @@ extension MoviesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 220
+    }
 }
 
 // MARK:- UITableViewDataSource
 extension MoviesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return presenter.moviesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell
-        if indexPath.row > 0 && (indexPath.row) % 5 == 0 {
-            cell = moviesTableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.adPlaceHolderTableViewCell.identifier, for: indexPath)
+        if (indexPath.row) % 5 == 0 {
+            guard let cell = moviesTableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.adPlaceHolderTableViewCell.identifier, for: indexPath) as? AdPlaceHolderTableViewCell else { return UITableViewCell() }
+            return cell
         } else {
-            cell = moviesTableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.movieTableViewCell.identifier, for: indexPath)
+            guard let cell = moviesTableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.movieTableViewCell.identifier, for: indexPath) as? MovieTableViewCell, let movie = presenter.getMovie(for: indexPath.row) else { return UITableViewCell() }
+            cell.bind(movie: movie)
+            return cell
         }
-        return cell
     }
-    
-    
 }

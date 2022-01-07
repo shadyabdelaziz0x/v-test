@@ -21,13 +21,25 @@ class SplashPresenter {
 
 // MARK:- SplashViewToPresenter
 extension SplashPresenter: SplashViewToPresenter {
-    func navigateToMoviesList() {
-        router.presentMoviesListModule()
+    
+    func viewDidLoad() {
+        interactor.fetchMovies()
     }
+    
 }
 
 // MARK:- SplashInteractorToPresenter
 extension SplashPresenter: SplashInteractorToPresenter {
+    func fetchMoviesDidFinish(status: FetchFromApiStatus) {
+        switch status {
+        case .success(let movies):
+            guard let moviesList = movies as? [Movie] else { return }
+            router.presentMoviesListModule(initialMovies: moviesList)
+        case .error(let error):
+            print(error)
+        }
+    }
+    
     
 }
 

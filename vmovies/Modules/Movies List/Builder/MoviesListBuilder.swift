@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MoviesListProtocol {
-    func build() -> UIViewController
+    func build(initialMovies: [Movie]?) -> UIViewController
 }
 
 class MoviesListBuilder : MoviesListProtocol {
@@ -18,12 +18,12 @@ class MoviesListBuilder : MoviesListProtocol {
     private var view       : MoviesListViewController!
     private var router     : MoviesListRouter!
     
-    func build() -> UIViewController {
+    func build(initialMovies: [Movie]?) -> UIViewController {
         do {
             registrInteractor()
             try registerView()
             registerRouter(MoviesListViewController: view)
-            registerPresenter()
+            registerPresenter(initialMovies: initialMovies)
             view.presenter = presenter
             interactor.presenter = presenter
             return view
@@ -44,8 +44,8 @@ class MoviesListBuilder : MoviesListProtocol {
         self.view = moviesListViewController
     }
     
-    private func registerPresenter() {
-        self.presenter = MoviesListPresenter(view: view, interactor: interactor, router: router)
+    private func registerPresenter(initialMovies: [Movie]?) {
+        self.presenter = MoviesListPresenter(view: view, interactor: interactor, router: router, initialMovies: initialMovies)
         
     }
     private func registerRouter(MoviesListViewController : UIViewController){
