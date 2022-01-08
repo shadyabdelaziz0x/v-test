@@ -12,26 +12,33 @@ class MoviesListPresenter {
     private var interactor : MoviesListPresenterToInteractor
     private var router     : MoviesListPresenterToRouter
     private var movies: [Movie] = []
+    private var moviesList: [[Movie]] = []
+    private let CHUNK_SIZE: Int = 5
     
     init(view: MoviesListPresenterToView, interactor: MoviesListPresenterToInteractor, router: MoviesListPresenterToRouter, initialMovies: [Movie]?) {
         self.view       = view
         self.interactor = interactor
         self.router     = router
         self.movies = initialMovies ?? []
+        self.moviesList = movies.chunked(into: CHUNK_SIZE)
     }
 }
 
 // MARK:- MoviesListViewToPresenter
 extension MoviesListPresenter: MoviesListViewToPresenter {
     var moviesCount: Int {
-        return movies.count
+        return moviesList.count
     }
     
     func getMovie(for index: Int) -> Movie? {
-        guard index > 0 && index < moviesCount else {
-            return nil
+        return movies[safe: index]
+    }
+    
+    func navigateToMovieDetails(for index: Int, with image: UIImage) {
+        guard let movie = movies[safe: index] else {
+            return
         }
-        return movies[index]
+        router.navigateToMovieDetails(data: MovieDetailsData(image: image, movie: movie))
     }
 }
 

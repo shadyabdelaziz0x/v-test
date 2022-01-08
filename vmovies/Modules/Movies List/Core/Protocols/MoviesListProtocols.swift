@@ -5,11 +5,12 @@
 //  Created by Shady Abdelaziz on 1/6/22.
 //
 
-import Foundation
+import UIKit
 
 protocol MoviesListViewToPresenter: AnyObject{
     var moviesCount: Int { get }
     func getMovie(for index: Int) -> Movie?
+    func navigateToMovieDetails(for index: Int, with image: UIImage)
 }
 
 protocol MoviesListPresenterToView: AnyObject{
@@ -21,7 +22,7 @@ protocol MoviesListPresenterToInteractor: AnyObject{
 }
 
 protocol MoviesListPresenterToRouter: AnyObject{
-    
+    func navigateToMovieDetails(data: MovieDetailsData)
 }
 
 protocol MoviesListInteractorToPresenter: AnyObject{

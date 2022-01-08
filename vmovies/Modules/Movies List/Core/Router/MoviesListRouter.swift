@@ -18,4 +18,8 @@ class MoviesListRouter {
 // MARK:- MoviesListPresenterToRouter
 extension MoviesListRouter: MoviesListPresenterToRouter {
 
+    func navigateToMovieDetails(data: MovieDetailsData) {
+        let movieDetailsController = MovieDetailsBuilder().build(data: data)
+        moviesListViewController.navigationController?.pushViewController(movieDetailsController, animated: true)
+    }
 }

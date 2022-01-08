@@ -10,12 +10,12 @@ import Foundation
 class Movie: Codable {
     let id                         : String
     let author                     : String
-    let width                      : Int
-    let height                     : Int
+    let width                      : Double
+    let height                     : Double
     let url                        : String
     let downloadUrl                : String
     
-    init(id: String, author: String, width: Int, height: Int, url: String, downloadUrl: String) {
+    init(id: String, author: String, width: Double, height: Double, url: String, downloadUrl: String) {
         self.id = id
         self.author = author
         self.width = width
@@ -49,8 +49,8 @@ class Movie: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.id =  try values.decode(String.self, forKey: .id)
         self.author = try values.decode(String.self, forKey: .author)
-        self.width = try values.decode(Int.self, forKey: .width)
-        self.height = try values.decode(Int.self, forKey: .height)
+        self.width = try values.decode(Double.self, forKey: .width)
+        self.height = try values.decode(Double.self, forKey: .height)
         self.url = try values.decode(String.self, forKey: .url)
         self.downloadUrl = try values.decode(String.self, forKey: .download_url)
     }
