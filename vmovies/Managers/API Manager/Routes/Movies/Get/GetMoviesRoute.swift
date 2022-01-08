@@ -16,7 +16,7 @@ struct GetMoviesRoute: APIConfiguration {
 
     init(params: GetMoviesRequest) {
         self.params        = params
-        self.urlParameters = ["page" : "\(params.page)", "limit": "\(params.limit)"]
+        self.urlParameters = ["page" : "\(params.page)", "limit": "\(params.limit ?? 0)"]
     }
     
     var path          : String              { return "v2/list" }
@@ -31,7 +31,7 @@ struct GetMoviesRoute: APIConfiguration {
 }
 
 extension APIClient {
-    func getMovies(page: Int, limit: Int) -> Promise<[Movie]> {
+    func getMovies(page: Int, limit: Int?) -> Promise<[Movie]> {
         return Promise { seal  in
             performRequest(route: GetMoviesRoute(params: GetMoviesRequest(page: page, limit: limit))) {
                 if let error = $1 {

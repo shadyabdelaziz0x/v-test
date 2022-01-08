@@ -9,5 +9,5 @@ import Foundation
 
 struct GetMoviesRequest: Codable {
     let page: Int
-    let limit: Int
+    let limit: Int?
 }

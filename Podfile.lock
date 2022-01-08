@@ -23,6 +23,7 @@ PODS:
   - SQLite.swift/standard (0.13.0)
   - SQLiteMigrationManager.swift (0.8.0):
     - SQLite.swift (~> 0.13.0)
+  - SwiftyUserDefaults (5.3.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - SDWebImage
   - SQLite.swift
   - SQLiteMigrationManager.swift
+  - SwiftyUserDefaults
 
 SPEC REPOS:
   trunk:
@@ -44,6 +46,7 @@ SPEC REPOS:
     - SDWebImage
     - SQLite.swift
     - SQLiteMigrationManager.swift
+    - SwiftyUserDefaults
 
 EXTERNAL SOURCES:
   AwaitKit:
@@ -65,7 +68,8 @@ SPEC CHECKSUMS:
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   SQLite.swift: 8add701609fd0ef78d097dcc75d20a9782e6f5fc
   SQLiteMigrationManager.swift: 4818b59bf0be6a21e1a494571d4e12950d317bbc
+  SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
 
-PODFILE CHECKSUM: f68bce945aad19a1941c4150e404aed4744cc9b3
+PODFILE CHECKSUM: ac60ae3c7f0932d07e34233dacc73b00076865de
 
 COCOAPODS: 1.11.2

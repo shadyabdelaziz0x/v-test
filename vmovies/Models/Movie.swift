@@ -11,9 +11,10 @@ class Movie: Codable {
     let id                         : String
     let author                     : String
     let width                      : Double
-    let height                     : Double
+    let height                     : Double?
     let url                        : String
     let downloadUrl                : String
+    var imageDownloaded            : Bool
     
     init(id: String, author: String, width: Double, height: Double, url: String, downloadUrl: String) {
         self.id = id
@@ -22,8 +23,8 @@ class Movie: Codable {
         self.height = height
         self.url = url
         self.downloadUrl = downloadUrl
+        imageDownloaded = false
     }
-    
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -32,8 +33,8 @@ class Movie: Codable {
         case height
         case url
         case download_url
+        case image_downloaded
     }
-    
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -43,6 +44,7 @@ class Movie: Codable {
         try container.encode(self.height, forKey: .height)
         try container.encode(self.url, forKey: .url)
         try container.encode(self.downloadUrl, forKey: .download_url)
+        try container.encode(self.imageDownloaded, forKey: .image_downloaded)
     }
     
     required init(from decoder:Decoder) throws {
@@ -50,9 +52,10 @@ class Movie: Codable {
         self.id =  try values.decode(String.self, forKey: .id)
         self.author = try values.decode(String.self, forKey: .author)
         self.width = try values.decode(Double.self, forKey: .width)
-        self.height = try values.decode(Double.self, forKey: .height)
+        self.height = try values.decode(Double?.self, forKey: .height)
         self.url = try values.decode(String.self, forKey: .url)
         self.downloadUrl = try values.decode(String.self, forKey: .download_url)
+        self.imageDownloaded = try values.decodeIfPresent(Bool.self, forKey: .image_downloaded) ?? false
     }
 }
 
@@ -62,7 +65,7 @@ extension Movie {
             id: \(id),
             author: \(author),
             width: \(width),
-            height: \(height),
+            height: \(height ?? 0.0),
             url: \(url),
             downloadUrl: \(downloadUrl),
         """

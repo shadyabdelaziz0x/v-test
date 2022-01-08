@@ -20,6 +20,7 @@ class MoviesManager {
         static var height = Expression<String>(MovieEntity.height)
         static let url = Expression<String>(MovieEntity.url)
         static let downloadUrl = Expression<Bool>(MovieEntity.downloadUrl)
+        static let imageDownloaded = Expression<Bool>(MovieEntity.imageDownloaded)
     }
     
     init?(connection: Connection) throws {
@@ -35,6 +36,7 @@ class MoviesManager {
             t.column(MovieCol.height)
             t.column(MovieCol.url)
             t.column(MovieCol.downloadUrl)
+            t.column(MovieCol.imageDownloaded)
         }))
     }
     
@@ -53,7 +55,7 @@ extension MoviesManager: MoviesManagerProtocol {
         try db.run(movieTable.delete())
     }
     
-    func getMovies() throws -> [Movie]? {
+    func getMovies() throws -> [Movie] {
         guard let db = dbConnection else {
             throw DatabaseError.cannotRetrieveMovies
         }
@@ -73,6 +75,26 @@ extension MoviesManager: MoviesManagerProtocol {
                 return
             }
         }
+    }
+    
+    func getNonDownloadedImageMovies() throws -> [Movie] {
+        guard let db = dbConnection else {
+            throw DatabaseError.cannotRetrieveMovies
+        }
+        let query = movieTable.filter(MovieCol.imageDownloaded == false)
+        let movies: [Movie] = try db.prepare(query).map {
+            try $0.decode()
+        }
+        return movies
+    }
+    
+    func setImageDownloaded(movieId: String) throws {
+        guard let db = dbConnection, let _ = try getMovieIfExist(movieId) else {
+            throw DatabaseError.cannotRetrieveMovies
+        }
+        try db.run(movieTable.filter(MovieCol.id == movieId).update(
+            MovieCol.imageDownloaded <- true
+        ))
     }
     
     private func getMovieIfExist(_ movieId: String) throws -> Movie? {

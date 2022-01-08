@@ -22,7 +22,8 @@ enum MovieEntity {
     static let width                      = "width"
     static let height                     = "height"
     static let url                        = "url"
-    static let downloadUrl                = "downloadUrl"
+    static let downloadUrl                = "download_url"
+    static let imageDownloaded            = "image_downloaded"
 }
 
 enum DatabaseError: Error {

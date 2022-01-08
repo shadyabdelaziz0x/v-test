@@ -60,8 +60,7 @@
 		F1D05B0A2789AC86008AFEED /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D05B092789AC86008AFEED /* DBManager.swift */; };
 		F1D05B152789AD69008AFEED /* MoviesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D05B142789AD69008AFEED /* MoviesManager.swift */; };
 		F1D05B202789AD9B008AFEED /* MoviesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D05B1F2789AD9B008AFEED /* MoviesManagerProtocol.swift */; };
-		F1D05B252789B4E8008AFEED /* movie.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F1D05B242789B4E8008AFEED /* movie.sqlite */; };
-		F1D05B2A2789B549008AFEED /* Migrations.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F1D05B292789B549008AFEED /* Migrations.bundle */; };
+		F1D05B432789D8D4008AFEED /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D05B422789D8D4008AFEED /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,8 +142,7 @@
 		F1D05B092789AC86008AFEED /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		F1D05B142789AD69008AFEED /* MoviesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesManager.swift; sourceTree = "<group>"; };
 		F1D05B1F2789AD9B008AFEED /* MoviesManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesManagerProtocol.swift; sourceTree = "<group>"; };
-		F1D05B242789B4E8008AFEED /* movie.sqlite */ = {isa = PBXFileReference; lastKnownFileType = text; path = movie.sqlite; sourceTree = "<group>"; };
-		F1D05B292789B549008AFEED /* Migrations.bundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = Migrations.bundle; sourceTree = "<group>"; };
+		F1D05B422789D8D4008AFEED /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -631,8 +629,6 @@
 				F17E0BCC2786685E00045516 /* Assets.xcassets */,
 				F17E0BCE2786685E00045516 /* LaunchScreen.storyboard */,
 				F17E0C7F2786821B00045516 /* Colors.xcassets */,
-				F1D05B242789B4E8008AFEED /* movie.sqlite */,
-				F1D05B292789B549008AFEED /* Migrations.bundle */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -640,8 +636,8 @@
 		F1D05ADB278987B4008AFEED /* Local Storage Manager */ = {
 			isa = PBXGroup;
 			children = (
-				F1D05ADC27898B2D008AFEED /* LocalStorageManager.swift */,
-				F1D05AE127898B5B008AFEED /* LocalStorageManagerProtocols.swift */,
+				F1D05B502789D8ED008AFEED /* Local Storage */,
+				F1D05B4C2789D8E4008AFEED /* User Defaults */,
 			);
 			path = "Local Storage Manager";
 			sourceTree = "<group>";
@@ -672,6 +668,23 @@
 				F1D05B1F2789AD9B008AFEED /* MoviesManagerProtocol.swift */,
 			);
 			path = "Movies Manager";
+			sourceTree = "<group>";
+		};
+		F1D05B4C2789D8E4008AFEED /* User Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				F1D05B422789D8D4008AFEED /* UserDefaultsManager.swift */,
+			);
+			path = "User Defaults";
+			sourceTree = "<group>";
+		};
+		F1D05B502789D8ED008AFEED /* Local Storage */ = {
+			isa = PBXGroup;
+			children = (
+				F1D05ADC27898B2D008AFEED /* LocalStorageManager.swift */,
+				F1D05AE127898B5B008AFEED /* LocalStorageManagerProtocols.swift */,
+			);
+			path = "Local Storage";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -784,8 +797,6 @@
 				F17E0BD02786685E00045516 /* LaunchScreen.storyboard in Resources */,
 				F17E0C802786821C00045516 /* Colors.xcassets in Resources */,
 				F17E0BCD2786685E00045516 /* Assets.xcassets in Resources */,
-				F1D05B2A2789B549008AFEED /* Migrations.bundle in Resources */,
-				F1D05B252789B4E8008AFEED /* movie.sqlite in Resources */,
 				F1D059C72787CD5B008AFEED /* MoviesList.storyboard in Resources */,
 				F17E0C342786755A00045516 /* Splash.storyboard in Resources */,
 				F1D05A912788BC73008AFEED /* MovieDetailsStoryboard.storyboard in Resources */,
@@ -902,6 +913,7 @@
 				F1D05B0A2789AC86008AFEED /* DBManager.swift in Sources */,
 				F1D05A1B2787D3BE008AFEED /* GetMoviesRequest.swift in Sources */,
 				F17E0CEC2786872500045516 /* R.generated.swift in Sources */,
+				F1D05B432789D8D4008AFEED /* UserDefaultsManager.swift in Sources */,
 				F1D05AC927891287008AFEED /* MovieDetailsData.swift in Sources */,
 				F1D059C82787CD5B008AFEED /* MoviesListBuilder.swift in Sources */,
 				F1D05AB52788BCE1008AFEED /* MovieDetailsProtocols.swift in Sources */,

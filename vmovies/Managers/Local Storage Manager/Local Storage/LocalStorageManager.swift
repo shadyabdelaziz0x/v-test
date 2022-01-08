@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
 
 class LocalStorageManager: LocalStorageManagerProtocols {
     
-    static var shared: LocalStorageManager = LocalStorageManager()
+    static let shared: LocalStorageManager = LocalStorageManager()
+    let defaults = Defaults
     
     @discardableResult
     func saveImage(imageData: Data, with id: String) -> String? {

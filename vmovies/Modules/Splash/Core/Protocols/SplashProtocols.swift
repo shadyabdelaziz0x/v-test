@@ -16,7 +16,7 @@ protocol SplashPresenterToView: AnyObject{
 }
 
 protocol SplashPresenterToInteractor: AnyObject{
-    func fetchMovies()
+    func syncMovies()
 }
 
 protocol SplashPresenterToRouter: AnyObject{

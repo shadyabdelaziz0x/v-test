@@ -14,16 +14,16 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet private weak var movieImage: UIImageView!
     
     func bind(movie: Movie) {
+        authorNameLabel.text = movie.author
         let url: URL? = URL(string: movie.downloadUrl)
         let screenWidth: CGFloat = UIScreen.main.bounds.width
-        let imageRatio: Double = movie.height / movie.width
-        SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 4 * 20 // 20 images (1024 * 1024 pixels)
+        let imageRatio: Double = (movie.height ?? 1.0) / (movie.width)
         let transformer = SDImageResizingTransformer(size: CGSize(width: screenWidth , height: screenWidth * CGFloat(imageRatio)), scaleMode: .aspectFit)
         movieImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//        movieImage.sd_setImage(with: url, placeholderImage: nil, options: .scaleDownLargeImages, context: [SDWebImageContextOption.imageTransformer: transformer])
-        
         movieImage.sd_setImage(with: url, placeholderImage: nil, options: .scaleDownLargeImages, context: [SDWebImageContextOption.imageTransformer: transformer], progress: nil) { (image, error, cache, urls) in
-            guard let _ = error, let localImageUrl = URL.fileURLIfExists(fileName: movie.id + ".jpeg") else { return }
+            guard let _ = error, let localImageUrl = URL.fileURLIfExists(fileName: movie.id + AppConstants.shared.IMAGE_EXTENSION) else {
+                return
+            }
             self.movieImage.sd_setImage(with: localImageUrl)
         }
     }

@@ -11,6 +11,7 @@ def sharedPods
     pod "SQLiteMigrationManager.swift"
     pod 'AwaitKit', :git => 'https://github.com/yannickl/AwaitKit.git', :branch => 'master'
     pod 'SDWebImage'
+    pod 'SwiftyUserDefaults'
 end
 
 target 'vmovies' do

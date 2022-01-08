@@ -53,41 +53,35 @@ class DBManager {
         do {
             try openDatabaseConnection()
             moviesManager = try MoviesManager(connection: dbConnection)
-            try migrateDatabase()
+//            try migrateDatabase()
         } catch {
             throw DatabaseError.cannotInitDatabase
         }
     }
     
-    private func migrateDatabase() throws {
-        return
-        guard let bundleURL = Bundle.main.url(forResource: "Migrations", withExtension: "bundle") else {
-            throw DatabaseError.cannotInitDatabase
-        }
-        guard let bundle = Bundle(url: bundleURL) else {
-            throw DatabaseError.cannotInitDatabase
-        }
-        
-        let manager = SQLiteMigrationManager(db: self.dbConnection, migrations: [], bundle: bundle)
-        
-        if !manager.hasMigrationsTable() {
-            try manager.createMigrationsTable()
-        }
-        
-        if manager.needsMigration() {
-            try manager.migrateDatabase()
-        }
-    }
+//    private func migrateDatabase() throws {
+//        guard let bundleURL = Bundle.main.url(forResource: "Migrations", withExtension: "bundle") else {
+//            throw DatabaseError.cannotInitDatabase
+//        }
+//        guard let bundle = Bundle(url: bundleURL) else {
+//            throw DatabaseError.cannotInitDatabase
+//        }
+//
+//        let manager = SQLiteMigrationManager(db: self.dbConnection, migrations: [], bundle: bundle)
+//
+//        if !manager.hasMigrationsTable() {
+//            try manager.createMigrationsTable()
+//        }
+//
+//        if manager.needsMigration() {
+//            try manager.migrateDatabase()
+//        }
+//    }
     
     private func openDatabaseConnection() throws {
         let databasePath = try FileManager.default.url(
             for: .documentDirectory, in: .userDomainMask,
             appropriateFor: nil, create: false).appendingPathComponent(databaseFileName).path
-        
-        if !FileManager.default.fileExists(atPath: databasePath) {
-            let originalDatabasePath = R.file.movieSqlite()?.path
-            try FileManager.default.copyItem(atPath: originalDatabasePath!, toPath: databasePath)
-        }
         print(databasePath)
         dbConnection = try Connection(databasePath)
         try dbConnection.execute("PRAGMA foreign_keys = ON")

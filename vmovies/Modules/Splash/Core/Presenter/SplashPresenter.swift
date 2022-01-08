@@ -23,7 +23,7 @@ class SplashPresenter {
 extension SplashPresenter: SplashViewToPresenter {
     
     func viewDidLoad() {
-        interactor.fetchMovies()
+        interactor.syncMovies()
     }
     
 }
@@ -36,7 +36,7 @@ extension SplashPresenter: SplashInteractorToPresenter {
             guard let moviesList = movies as? [Movie] else { return }
             router.presentMoviesListModule(initialMovies: moviesList)
         case .error(let error):
-            print(error)
+            print("ERROR = \(error)")
         }
     }
     
