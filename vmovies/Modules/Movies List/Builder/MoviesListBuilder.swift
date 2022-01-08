@@ -20,7 +20,7 @@ class MoviesListBuilder : MoviesListProtocol {
     
     func build(initialMovies: [Movie]?) -> UIViewController {
         do {
-            registrInteractor()
+            registrInteractor(apiClient: APIClient.shared)
             try registerView()
             registerRouter(MoviesListViewController: view)
             registerPresenter(initialMovies: initialMovies)
@@ -33,8 +33,8 @@ class MoviesListBuilder : MoviesListProtocol {
     }
     
     
-    private func registrInteractor() {
-        self.interactor = MoviesListInteractor()
+    private func registrInteractor(apiClient: APIClientProtocol) {
+        self.interactor = MoviesListInteractor(apiClient: apiClient)
     }
     
     private func registerView() throws {

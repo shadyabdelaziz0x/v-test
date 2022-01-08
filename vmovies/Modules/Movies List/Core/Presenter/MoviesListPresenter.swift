@@ -14,6 +14,7 @@ class MoviesListPresenter {
     private var movies: [Movie] = []
     private var moviesList: [[Movie]] = []
     private let CHUNK_SIZE: Int = 5
+    private var page: Int = 2
     
     init(view: MoviesListPresenterToView, interactor: MoviesListPresenterToInteractor, router: MoviesListPresenterToRouter, initialMovies: [Movie]?) {
         self.view       = view
@@ -34,8 +35,8 @@ extension MoviesListPresenter: MoviesListViewToPresenter {
         return moviesList[safe: section]?.count ?? 0
     }
     
-    func getMovie(for index: Int) -> Movie? {
-        return movies[safe: index]
+    func getMovie(section: Int, index: Int) -> Movie? {
+        return moviesList[safe: section]?[safe: index]
     }
     
     func navigateToMovieDetails(for index: Int, with image: UIImage) {
@@ -44,9 +45,23 @@ extension MoviesListPresenter: MoviesListViewToPresenter {
         }
         router.navigateToMovieDetails(data: MovieDetailsData(image: image, movie: movie))
     }
+    
+    func fetchMoreMovies() {
+        interactor.fetchMovies(page: page)
+    }
 }
 
 // MARK:- MoviesListInteractorToPresenter
 extension MoviesListPresenter: MoviesListInteractorToPresenter {
-    
+    func fetchingMoviesDidFinished(status: FetchFromApiStatus) {
+        switch status {
+        case .success(let movies):
+            guard let newMoviesList = movies as? [Movie], moviesList.count > 0 else { return }
+            page += 1
+            moviesList.append(contentsOf: newMoviesList.chunked(into: CHUNK_SIZE))
+            view.reloadTable()
+        case .error(let error):
+            print("ERROR \(error)")
+        }
+    }
 }

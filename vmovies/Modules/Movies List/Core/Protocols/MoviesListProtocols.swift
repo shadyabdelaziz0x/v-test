@@ -10,16 +10,17 @@ import UIKit
 protocol MoviesListViewToPresenter: AnyObject{
     var moviesSectionsCount: Int { get }
     func getMoviesRowsPerSection(section: Int) -> Int
-    func getMovie(for index: Int) -> Movie?
+    func getMovie(section: Int, index: Int) -> Movie?
     func navigateToMovieDetails(for index: Int, with image: UIImage)
+    func fetchMoreMovies()
 }
 
 protocol MoviesListPresenterToView: AnyObject{
-    
+    func reloadTable()
 }
 
 protocol MoviesListPresenterToInteractor: AnyObject{
-    
+    func fetchMovies(page: Int)
 }
 
 protocol MoviesListPresenterToRouter: AnyObject{
@@ -27,5 +28,5 @@ protocol MoviesListPresenterToRouter: AnyObject{
 }
 
 protocol MoviesListInteractorToPresenter: AnyObject{
-
+    func fetchingMoviesDidFinished(status: FetchFromApiStatus)
 }

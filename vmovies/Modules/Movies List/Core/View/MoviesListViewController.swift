@@ -16,7 +16,9 @@ class MoviesListViewController: UIViewController {
         static let tableViewTopEdgeInset: CGFloat = -40
         static let tableViewCellHeight: CGFloat = 250
         static let tableViewSectionHeaderHeight: CGFloat = 70
+        static let spinnerFrameHeight: CGFloat = 44
     }
+    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +28,28 @@ class MoviesListViewController: UIViewController {
     private func setupView() {
         navigationHeader.bindData(title: "Movies List", delegate: nil)
         moviesTableView.contentInset = UIEdgeInsets(top: constants.tableViewTopEdgeInset, left: 0, bottom: 0, right: 0)
+        spinner.hidesWhenStopped = true
+        spinner.frame = CGRect(x: 0, y: 0, width: moviesTableView.bounds.width, height: constants.spinnerFrameHeight)
+        moviesTableView.tableFooterView = spinner
     }
 
 }
 
 // MARK:- MoviesListPresenterToView
 extension MoviesListViewController: MoviesListPresenterToView {
+    func reloadTable() {
+        moviesTableView.reloadData()
+        setSpinnerVisibility(hidden: true)
+    }
     
+    private func setSpinnerVisibility(hidden: Bool) {
+        if hidden {
+            spinner.stopAnimating()
+        } else {
+            spinner.startAnimating()
+        }
+        moviesTableView.tableFooterView?.isHidden = hidden
+    }
 }
 
 // MARK:- UITableViewDelegate
@@ -47,6 +64,16 @@ extension MoviesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return constants.tableViewCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastSectionIndex = tableView.numberOfSections - 1
+        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+        let isLastCell: Bool = indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex
+        setSpinnerVisibility(hidden: !isLastCell)
+        if isLastCell {
+            presenter.fetchMoreMovies()
+        }
     }
 }
 
@@ -84,7 +111,7 @@ extension MoviesListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = moviesTableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.movieTableViewCell.identifier, for: indexPath) as? MovieTableViewCell, let movie = presenter.getMovie(for: indexPath.row) else { return UITableViewCell() }
+        guard let cell = moviesTableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.movieTableViewCell.identifier, for: indexPath) as? MovieTableViewCell, let movie = presenter.getMovie(section: indexPath.section, index: indexPath.row) else { return UITableViewCell() }
         cell.bind(movie: movie)
         return cell
     }
