@@ -19,11 +19,12 @@ struct GetMoviesRoute: APIConfiguration {
         self.urlParameters = ["page" : "\(params.page)", "limit": "\(params.limit)"]
     }
     
-    var path          : String              { return "v2/list"}
+    var path          : String              { return "v2/list" }
     let method        : HTTPMethod           = .get
     let isAuth        : Bool                 = false
     let isPrintable   : Bool                 = true
-    
+    var appendBaseUrl : Bool                 = true
+
     func getParameters() throws -> Data? {
         return nil
     }

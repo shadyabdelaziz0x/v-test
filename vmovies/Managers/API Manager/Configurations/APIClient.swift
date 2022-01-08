@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import PromiseKit
 
-class APIClient: APIClientProtocol {
+class APIClient: APIClientProtocol {    
     
     typealias responseCallBack = (_ response: Data?, _ error: Error?) -> Void
     

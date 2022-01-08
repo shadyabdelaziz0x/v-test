@@ -8,7 +8,8 @@
 import UIKit
 
 protocol MoviesListViewToPresenter: AnyObject{
-    var moviesCount: Int { get }
+    var moviesSectionsCount: Int { get }
+    func getMoviesRowsPerSection(section: Int) -> Int
     func getMovie(for index: Int) -> Movie?
     func navigateToMovieDetails(for index: Int, with image: UIImage)
 }

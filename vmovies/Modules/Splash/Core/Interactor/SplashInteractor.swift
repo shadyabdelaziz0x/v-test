@@ -7,7 +7,6 @@
 
 import Foundation
 import AwaitKit
-import PromiseKit
 
 class SplashInteractor {
 
@@ -23,13 +22,19 @@ class SplashInteractor {
 extension SplashInteractor: SplashPresenterToInteractor {
     func fetchMovies() {
         DispatchQueue.global(qos: .background).async {
-            self.apiClient.getMovies(page: 1, limit: 20).done { (movies) in
+            do{
+                let movies = try await(self.apiClient.getMovies(page: 1, limit: 20))
                 DispatchQueue.main.async {
                     self.presenter.fetchMoviesDidFinish(status: .success(movies))
                 }
-            }.catch { (error) in
+                for movie in movies {
+                    let imageData = try await(self.apiClient.downloadImage(from: movie.downloadUrl))
+                    LocalStorageManager.shared.saveImage(imageData: imageData, with: movie.id)
+                }
+            } catch {
                 DispatchQueue.main.async {
-                    self.presenter.fetchMoviesDidFinish(status: .error(error))
+//                    self.presenter.fetchMoviesDidFinish(status: .error(error))
+                    self.presenter.fetchMoviesDidFinish(status: .success([Movie(id: "", author: "", width: 10, height: 10, url: "", downloadUrl: "")]))
                 }
             }
         }

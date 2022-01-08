@@ -15,7 +15,6 @@ class MoviesListViewController: UIViewController {
     private struct constants {
         static let tableViewTopEdgeInset: CGFloat = -40
         static let tableViewCellHeight: CGFloat = 250
-        static let tableViewRowsPerSection: Int = 5
         static let tableViewSectionHeaderHeight: CGFloat = 70
     }
     
@@ -55,11 +54,11 @@ extension MoviesListViewController: UITableViewDelegate {
 extension MoviesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return constants.tableViewRowsPerSection
+        return presenter.getMoviesRowsPerSection(section: section)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.moviesCount
+        return presenter.moviesSectionsCount
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

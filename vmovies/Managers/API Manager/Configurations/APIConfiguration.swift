@@ -32,13 +32,14 @@ protocol APIConfiguration: URLRequestConvertible {
     var urlParameters: [String: String]? { get }
     var isAuth: Bool { get }
     var isPrintable: Bool { get }
+    var appendBaseUrl: Bool { get }
     func getParameters() throws -> Data?
 }
 
 
 extension APIConfiguration {
     func asURLRequest() throws -> URLRequest {
-        let urlString = API.Constants.baseURL + path
+        let urlString = appendBaseUrl ? API.Constants.baseURL + path : path
 
         guard  var url = URLComponents(string: urlString) else {
             throw APIError.failedToGetUrl

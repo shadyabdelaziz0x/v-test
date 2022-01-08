@@ -20,7 +20,12 @@ class MovieTableViewCell: UITableViewCell {
         SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 4 * 20 // 20 images (1024 * 1024 pixels)
         let transformer = SDImageResizingTransformer(size: CGSize(width: screenWidth , height: screenWidth * CGFloat(imageRatio)), scaleMode: .aspectFit)
         movieImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        movieImage.sd_setImage(with: url, placeholderImage: nil, options: .retryFailed, context: [SDWebImageContextOption.imageTransformer: transformer])
+//        movieImage.sd_setImage(with: url, placeholderImage: nil, options: .scaleDownLargeImages, context: [SDWebImageContextOption.imageTransformer: transformer])
+        
+        movieImage.sd_setImage(with: url, placeholderImage: nil, options: .scaleDownLargeImages, context: [SDWebImageContextOption.imageTransformer: transformer], progress: nil) { (image, error, cache, urls) in
+            guard let _ = error, let localImageUrl = URL.fileURLIfExists(fileName: movie.id + ".jpeg") else { return }
+            self.movieImage.sd_setImage(with: localImageUrl)
+        }
     }
     
     func getImage() -> UIImage? {

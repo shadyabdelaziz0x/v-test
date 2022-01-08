@@ -8,6 +8,7 @@
 import Foundation
 import PromiseKit
 
-protocol APIClientProtocol {
+protocol APIClientProtocol: AnyObject {
     func getMovies(page: Int, limit: Int) -> Promise<[Movie]>
+    func downloadImage(from url: String) -> Promise<Data>
 }

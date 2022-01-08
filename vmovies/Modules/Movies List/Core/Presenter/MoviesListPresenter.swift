@@ -20,14 +20,18 @@ class MoviesListPresenter {
         self.interactor = interactor
         self.router     = router
         self.movies = initialMovies ?? []
-        self.moviesList = movies.chunked(into: CHUNK_SIZE)
+        self.moviesList = movies.chunked(into: movies.count < CHUNK_SIZE ? movies.count : CHUNK_SIZE)
     }
 }
 
 // MARK:- MoviesListViewToPresenter
 extension MoviesListPresenter: MoviesListViewToPresenter {
-    var moviesCount: Int {
+    var moviesSectionsCount: Int {
         return moviesList.count
+    }
+    
+    func getMoviesRowsPerSection(section: Int) -> Int {
+        return moviesList[safe: section]?.count ?? 0
     }
     
     func getMovie(for index: Int) -> Movie? {
