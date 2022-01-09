@@ -31,6 +31,7 @@
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iec-F0-hui">
                                 <rect key="frame" x="0.0" y="104" width="414" height="792"/>
+                                <color key="tintColor" name="RedE60000"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="19q-Lq-WnX"/>

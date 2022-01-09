@@ -47,7 +47,8 @@ extension MoviesListViewController: MoviesListPresenterToView {
     }
     
     func setError(error: Error) {
-        
+        //TODO:- handle error using certain design
+        setSpinnerVisibility(hidden: true)
     }
     
     private func setSpinnerVisibility(hidden: Bool) {
@@ -78,9 +79,9 @@ extension MoviesListViewController: UITableViewDelegate {
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         let isLastCell: Bool = indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex
-        setSpinnerVisibility(hidden: !isLastCell)
         if isLastCell {
             presenter.fetchMoreMovies()
+            setSpinnerVisibility(hidden: false)
         }
     }
 }
