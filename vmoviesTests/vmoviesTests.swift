@@ -10,17 +10,26 @@ import XCTest
 
 class vmoviesTests: XCTestCase {
 
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testChunkArray() {
+        let inputArr: [Int] = Array(1...100)
+        let chunkSize: Int = 5
+        let chunkedArr: [[Int]] = inputArr.chunked(into: chunkSize)
+        chunkedArr.forEach { XCTAssertLessThanOrEqual($0.count, chunkSize) }
+    }
+    
+    func testSafeSubscript() {
+        let inputArr: [Int] = Array(1...100)
+        XCTAssertNil(inputArr[safe: 200])
+        XCTAssertNotNil(inputArr[safe: 50])
     }
 
     func testPerformanceExample() throws {

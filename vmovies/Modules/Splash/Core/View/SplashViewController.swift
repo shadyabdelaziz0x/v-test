@@ -13,7 +13,7 @@ class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter.viewDidLoad()
+        presenter.syncApp()
     }
 
 }

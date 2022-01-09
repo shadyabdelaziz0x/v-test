@@ -22,7 +22,7 @@ class SplashPresenter {
 // MARK:- SplashViewToPresenter
 extension SplashPresenter: SplashViewToPresenter {
     
-    func viewDidLoad() {
+    func syncApp() {
         interactor.syncMovies()
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SplashViewToPresenter: AnyObject{
-    func viewDidLoad()
+    func syncApp()
 }
 
 protocol SplashPresenterToView: AnyObject{
