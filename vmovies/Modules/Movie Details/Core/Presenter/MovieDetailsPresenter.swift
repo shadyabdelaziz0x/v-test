@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ColorThiefSwift
 
 class MovieDetailsPresenter {
     private weak var view  : MovieDetailsPresenterToView!
@@ -29,6 +30,10 @@ extension MovieDetailsPresenter: MovieDetailsViewToPresenter {
     
     var movieAttachment: UIImage {
         return data.image
+    }
+    
+    var dominantColor: UIColor? {
+        return ColorThief.getColor(from: data.image)?.makeUIColor()
     }
     
     func didClickBack() {

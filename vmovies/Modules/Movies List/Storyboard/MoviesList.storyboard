@@ -87,24 +87,47 @@
                                     <constraint firstAttribute="height" constant="60" id="nnA-Df-pjS"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mL3-5Y-69u">
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3li-n2-13n">
+                                        <rect key="frame" x="0.0" y="379" width="414" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="3li-n2-13n" firstAttribute="centerY" secondItem="mL3-5Y-69u" secondAttribute="centerY" id="1xJ-8h-W6n"/>
+                                    <constraint firstAttribute="trailing" secondItem="3li-n2-13n" secondAttribute="trailing" id="Bvd-hy-hzx"/>
+                                    <constraint firstItem="3li-n2-13n" firstAttribute="leading" secondItem="mL3-5Y-69u" secondAttribute="leading" id="ahA-Zt-s78"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9zG-1K-mZr"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="mL3-5Y-69u" firstAttribute="leading" secondItem="9zG-1K-mZr" secondAttribute="leading" id="9XP-5t-w91"/>
                             <constraint firstItem="KW4-Qc-ayu" firstAttribute="top" secondItem="bc4-w0-mu7" secondAttribute="bottom" id="FRe-Vf-Web"/>
                             <constraint firstItem="KW4-Qc-ayu" firstAttribute="leading" secondItem="9zG-1K-mZr" secondAttribute="leading" id="FuX-oL-84C"/>
                             <constraint firstAttribute="bottom" secondItem="sN0-Nh-Mdj" secondAttribute="bottom" id="GdE-Mz-wRq"/>
+                            <constraint firstItem="mL3-5Y-69u" firstAttribute="top" secondItem="KW4-Qc-ayu" secondAttribute="bottom" id="Grj-Bu-FTt"/>
                             <constraint firstItem="sN0-Nh-Mdj" firstAttribute="leading" secondItem="9zG-1K-mZr" secondAttribute="leading" id="O7o-aZ-0ij"/>
+                            <constraint firstItem="9zG-1K-mZr" firstAttribute="bottom" secondItem="mL3-5Y-69u" secondAttribute="bottom" id="R9K-qq-5ap"/>
                             <constraint firstItem="9zG-1K-mZr" firstAttribute="trailing" secondItem="KW4-Qc-ayu" secondAttribute="trailing" id="U9N-ho-67e"/>
                             <constraint firstItem="9zG-1K-mZr" firstAttribute="trailing" secondItem="bc4-w0-mu7" secondAttribute="trailing" id="Y0w-sI-kXz"/>
                             <constraint firstItem="bc4-w0-mu7" firstAttribute="leading" secondItem="9zG-1K-mZr" secondAttribute="leading" id="Zn0-9o-O1G"/>
                             <constraint firstItem="sN0-Nh-Mdj" firstAttribute="top" secondItem="KW4-Qc-ayu" secondAttribute="bottom" id="bYR-px-gdi"/>
                             <constraint firstItem="9zG-1K-mZr" firstAttribute="trailing" secondItem="sN0-Nh-Mdj" secondAttribute="trailing" id="jA7-Rh-aEv"/>
                             <constraint firstAttribute="top" secondItem="bc4-w0-mu7" secondAttribute="top" id="mm5-fx-Vth"/>
+                            <constraint firstItem="9zG-1K-mZr" firstAttribute="trailing" secondItem="mL3-5Y-69u" secondAttribute="trailing" id="uRS-eR-bJl"/>
                             <constraint firstItem="KW4-Qc-ayu" firstAttribute="top" secondItem="9zG-1K-mZr" secondAttribute="top" id="xVk-V9-zMt"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emptyLabel" destination="3li-n2-13n" id="LR1-Ah-2EF"/>
+                        <outlet property="emptyView" destination="mL3-5Y-69u" id="aKe-Qe-ARX"/>
                         <outlet property="moviesTableView" destination="sN0-Nh-Mdj" id="IQZ-36-zua"/>
                         <outlet property="navigationHeader" destination="KW4-Qc-ayu" id="k44-b0-4p0"/>
                     </connections>

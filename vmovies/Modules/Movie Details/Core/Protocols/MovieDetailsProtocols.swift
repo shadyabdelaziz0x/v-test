@@ -10,6 +10,7 @@ import UIKit
 protocol MovieDetailsViewToPresenter: AnyObject{
     var movieAuthor: String { get }
     var movieAttachment: UIImage { get }
+    var dominantColor: UIColor? { get }
     func didClickBack()
 }
 

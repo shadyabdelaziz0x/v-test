@@ -25,28 +25,28 @@ class SplashInteractor {
 // MARK:- SplashPresenterToInteractor
 extension SplashInteractor: SplashPresenterToInteractor {
     func syncMovies() {
-        //check if fetching first 20 movies and saving is done
+        //check if fetching first 20 movies and saving them is done
         let mainSyncDone = localStorageManager.defaults.mainSyncDone
         DispatchQueue.global(qos: .background).async {
             do{
                 var movies: [Movie] = []
                 if mainSyncDone {
                     movies = try self.dbManager.moviesManager.getMovies()
-                    self.fetchMoviesDidFinishedSuccessfully(movies: movies)
+                    self.fetchMoviesDidFinished(status: .success(movies))
                 } else {
                     movies = try await(self.apiClient.getMovies(page: 1, limit: AppConstants.shared.MOVIES_BATCH_SIZE))
-                    self.fetchMoviesDidFinishedSuccessfully(movies: movies)
+                    self.fetchMoviesDidFinished(status: .success(movies))
                     try self.dbManager.moviesManager.insertMovies(movies)
                     self.localStorageManager.defaults.mainSyncDone = true
                 }
-                self.downloadImagesForCashedData()
-            } catch {
-                print("ERROR")
+                self.downloadImagesForSavedData()
+            } catch let error {
+                self.fetchMoviesDidFinished(status: .error(error))
             }
         }
     }
     
-    private func downloadImagesForCashedData() {
+    private func downloadImagesForSavedData() {
         let isCashFull = localStorageManager.defaults.isCashFull
         guard !isCashFull else {
             return
@@ -62,14 +62,14 @@ extension SplashInteractor: SplashPresenterToInteractor {
                 }
             }
             self.localStorageManager.defaults.isCashFull = true
-        } catch {
-            print("ERROR")
+        } catch let error {
+            print("Failed to cach images : \(error)")
         }
     }
     
-    private func fetchMoviesDidFinishedSuccessfully(movies: [Movie]) {
+    private func fetchMoviesDidFinished(status: FetchFromApiStatus) {
         DispatchQueue.main.async {
-            self.presenter.fetchMoviesDidFinish(status: .success(movies))
+            self.presenter.fetchMoviesDidFinish(status: status)
         }
     }
 }

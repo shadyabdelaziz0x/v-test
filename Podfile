@@ -12,6 +12,7 @@ def sharedPods
     pod 'AwaitKit', :git => 'https://github.com/yannickl/AwaitKit.git', :branch => 'master'
     pod 'SDWebImage'
     pod 'SwiftyUserDefaults'
+    pod 'ColorThiefSwift', '>= 0.4.1'
 end
 
 target 'vmovies' do

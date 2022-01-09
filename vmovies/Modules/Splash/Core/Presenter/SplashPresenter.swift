@@ -37,6 +37,7 @@ extension SplashPresenter: SplashInteractorToPresenter {
             router.presentMoviesListModule(initialMovies: moviesList)
         case .error(let error):
             print("ERROR = \(error)")
+            router.presentMoviesListModule(initialMovies: nil)
         }
     }
     

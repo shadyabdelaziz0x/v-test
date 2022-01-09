@@ -30,11 +30,11 @@ class MovieTableViewCell: UITableViewCell {
         let transformer = SDImageResizingTransformer(size: CGSize(width: screenWidth , height: screenWidth * CGFloat(imageRatio)), scaleMode: .aspectFit)
         
         movieImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        movieImage.sd_setImage(with: url, placeholderImage: nil, options: .refreshCached, context: [SDWebImageContextOption.imageTransformer: transformer], progress: nil) { (image, error, cache, urls) in
+        movieImage.sd_setImage(with: url, placeholderImage: nil, options: .scaleDownLargeImages, context: [SDWebImageContextOption.imageTransformer: transformer], progress: nil) { (image, error, cache, urls) in
             guard let _ = error else {
                 return
             }
-            self.movieImage.image = R.image.logo()
+            self.movieImage.image = R.image.placeholderImage()
         }
     }
     

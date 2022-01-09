@@ -12,6 +12,8 @@ class MoviesListViewController: UIViewController {
     var presenter: MoviesListViewToPresenter!
     @IBOutlet private weak var moviesTableView: UITableView!
     @IBOutlet private weak var navigationHeader: NavigationHeader!
+    @IBOutlet private weak var emptyView: UIView!
+    @IBOutlet private weak var emptyLabel: UILabel!
     private struct constants {
         static let tableViewTopEdgeInset: CGFloat = -40
         static let tableViewCellHeight: CGFloat = 250
@@ -26,11 +28,13 @@ class MoviesListViewController: UIViewController {
     }
     
     private func setupView() {
-        navigationHeader.bindData(title: "Movies List", delegate: nil)
+        navigationHeader.bindData(title: R.string.strings.moviesListTitle(), delegate: nil)
         moviesTableView.contentInset = UIEdgeInsets(top: constants.tableViewTopEdgeInset, left: 0, bottom: 0, right: 0)
         spinner.hidesWhenStopped = true
         spinner.frame = CGRect(x: 0, y: 0, width: moviesTableView.bounds.width, height: constants.spinnerFrameHeight)
         moviesTableView.tableFooterView = spinner
+        emptyView.isHidden = presenter.moviesSectionsCount > 0
+        emptyLabel.text = R.string.strings.emptyTitle()
     }
 
 }
@@ -40,6 +44,10 @@ extension MoviesListViewController: MoviesListPresenterToView {
     func reloadTable() {
         moviesTableView.reloadData()
         setSpinnerVisibility(hidden: true)
+    }
+    
+    func setError(error: Error) {
+        
     }
     
     private func setSpinnerVisibility(hidden: Bool) {
@@ -95,7 +103,7 @@ extension MoviesListViewController: UITableViewDataSource {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: constants.tableViewSectionHeaderHeight))
         view.backgroundColor = R.color.redE60000()
         let label = UILabel(frame: view.bounds)
-        label.text = "Ad Placeholder"
+        label.text = R.string.strings.adPlaceHolderText()
         view.addSubview(label)
         label.center = view.center
         label.textColor = UIColor.white

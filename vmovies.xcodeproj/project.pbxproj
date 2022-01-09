@@ -61,6 +61,7 @@
 		F1D05B152789AD69008AFEED /* MoviesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D05B142789AD69008AFEED /* MoviesManager.swift */; };
 		F1D05B202789AD9B008AFEED /* MoviesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D05B1F2789AD9B008AFEED /* MoviesManagerProtocol.swift */; };
 		F1D05B432789D8D4008AFEED /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D05B422789D8D4008AFEED /* UserDefaultsManager.swift */; };
+		F1D05B5F2789F901008AFEED /* Strings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1D05B5E2789F901008AFEED /* Strings.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,7 @@
 		F1D05B142789AD69008AFEED /* MoviesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesManager.swift; sourceTree = "<group>"; };
 		F1D05B1F2789AD9B008AFEED /* MoviesManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesManagerProtocol.swift; sourceTree = "<group>"; };
 		F1D05B422789D8D4008AFEED /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		F1D05B5E2789F901008AFEED /* Strings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Strings.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -626,6 +628,7 @@
 		F1D05AD727897B94008AFEED /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F1D05B5D2789F8F1008AFEED /* Strings */,
 				F17E0BCC2786685E00045516 /* Assets.xcassets */,
 				F17E0BCE2786685E00045516 /* LaunchScreen.storyboard */,
 				F17E0C7F2786821B00045516 /* Colors.xcassets */,
@@ -685,6 +688,14 @@
 				F1D05AE127898B5B008AFEED /* LocalStorageManagerProtocols.swift */,
 			);
 			path = "Local Storage";
+			sourceTree = "<group>";
+		};
+		F1D05B5D2789F8F1008AFEED /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				F1D05B5E2789F901008AFEED /* Strings.strings */,
+			);
+			path = Strings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -794,6 +805,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1D05AC32789049C008AFEED /* NavigationHeader.xib in Resources */,
+				F1D05B5F2789F901008AFEED /* Strings.strings in Resources */,
 				F17E0BD02786685E00045516 /* LaunchScreen.storyboard in Resources */,
 				F17E0C802786821C00045516 /* Colors.xcassets in Resources */,
 				F17E0BCD2786685E00045516 /* Assets.xcassets in Resources */,

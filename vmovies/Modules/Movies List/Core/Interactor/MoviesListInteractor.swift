@@ -24,14 +24,16 @@ extension MoviesListInteractor: MoviesListPresenterToInteractor {
         DispatchQueue.global(qos: .background).async {
             do {
                 let movies: [Movie] = try await(self.apiClient.getMovies(page: page, limit: AppConstants.shared.MOVIES_BATCH_SIZE))
-                DispatchQueue.main.sync {
-                    self.presenter.fetchingMoviesDidFinished(status: .success(movies))
-                }
+                self.fetchingMoviesDidFinished(status: .success(movies))
             } catch let error {
-                DispatchQueue.main.sync {
-                    self.presenter.fetchingMoviesDidFinished(status: .error(error))
-                }
+                self.fetchingMoviesDidFinished(status: .error(error))
             }
+        }
+    }
+    
+    private func fetchingMoviesDidFinished(status: FetchFromApiStatus) {
+        DispatchQueue.main.sync {
+            self.presenter.fetchingMoviesDidFinished(status: status)
         }
     }
 }

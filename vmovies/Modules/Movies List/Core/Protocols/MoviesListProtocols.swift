@@ -17,6 +17,7 @@ protocol MoviesListViewToPresenter: AnyObject{
 
 protocol MoviesListPresenterToView: AnyObject{
     func reloadTable()
+    func setError(error: Error)
 }
 
 protocol MoviesListPresenterToInteractor: AnyObject{

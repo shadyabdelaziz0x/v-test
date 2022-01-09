@@ -14,7 +14,7 @@ class Movie: Codable {
     let height                     : Double?
     let url                        : String
     let downloadUrl                : String
-    var imageDownloaded            : Bool
+    let imageDownloaded            : Bool
     
     init(id: String, author: String, width: Double, height: Double, url: String, downloadUrl: String) {
         self.id = id
@@ -68,6 +68,7 @@ extension Movie {
             height: \(height ?? 0.0),
             url: \(url),
             downloadUrl: \(downloadUrl),
+            imageDownloaded: \(imageDownloaded)
         """
     }
 }

@@ -1,0 +1,11 @@
+/* 
+  Strings.strings
+  vmovies
+
+  Created by Shady Abdelaziz on 1/8/22.
+  
+*/
+"adPlaceHolderText" = "Ad Placeholder";
+"moviesListTitle" = "Movies List";
+"movieDetailTitle" = "Movie Detail";
+"emptyTitle" = "Movies Not Available";

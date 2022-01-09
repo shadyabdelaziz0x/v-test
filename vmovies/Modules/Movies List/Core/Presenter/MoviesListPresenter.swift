@@ -22,6 +22,7 @@ class MoviesListPresenter {
         self.router     = router
         self.movies = initialMovies ?? []
         self.moviesList = movies.chunked(into: movies.count < CHUNK_SIZE ? movies.count : CHUNK_SIZE)
+        page = self.movies.count == 0 ? 1 : 2
     }
 }
 
@@ -61,7 +62,7 @@ extension MoviesListPresenter: MoviesListInteractorToPresenter {
             moviesList.append(contentsOf: newMoviesList.chunked(into: CHUNK_SIZE))
             view.reloadTable()
         case .error(let error):
-            print("ERROR \(error)")
+            view.setError(error: error)
         }
     }
 }

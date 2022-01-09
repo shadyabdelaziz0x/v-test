@@ -19,7 +19,8 @@ class MovieDetailsViewController: UIViewController {
     }
     
     private func setupView() {
-        navigationHeader.bindData(title: "Movie Details", delegate: self)
+        navigationHeader.bindData(title: R.string.strings.movieDetailTitle(), delegate: self)
+        movieImageView.backgroundColor = presenter.dominantColor
         movieImageView.image = presenter.movieAttachment
     }
 
