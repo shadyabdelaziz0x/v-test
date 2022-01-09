@@ -11,18 +11,17 @@ class MoviesListPresenter {
     private weak var view  : MoviesListPresenterToView!
     private var interactor : MoviesListPresenterToInteractor
     private var router     : MoviesListPresenterToRouter
-    private var movies: [Movie] = []
     private var moviesList: [[Movie]] = []
     private let CHUNK_SIZE: Int = 5
-    private var page: Int = 2
+    private var page: Int
     
     init(view: MoviesListPresenterToView, interactor: MoviesListPresenterToInteractor, router: MoviesListPresenterToRouter, initialMovies: [Movie]?) {
         self.view       = view
         self.interactor = interactor
         self.router     = router
-        self.movies = initialMovies ?? []
+        let movies = initialMovies ?? []
         self.moviesList = movies.chunked(into: movies.count < CHUNK_SIZE ? movies.count : CHUNK_SIZE)
-        page = self.movies.count == 0 ? 1 : 2
+        page = movies.count == 0 ? 1 : 2
     }
 }
 
@@ -40,8 +39,8 @@ extension MoviesListPresenter: MoviesListViewToPresenter {
         return moviesList[safe: section]?[safe: index]
     }
     
-    func navigateToMovieDetails(for index: Int, with image: UIImage) {
-        guard let movie = movies[safe: index] else {
+    func navigateToMovieDetails(section: Int, index: Int, with image: UIImage) {
+        guard let movie = moviesList[safe: section]?[safe: index] else {
             return
         }
         router.navigateToMovieDetails(data: MovieDetailsData(image: image, movie: movie))
@@ -57,7 +56,11 @@ extension MoviesListPresenter: MoviesListInteractorToPresenter {
     func fetchingMoviesDidFinished(status: FetchFromApiStatus) {
         switch status {
         case .success(let movies):
-            guard let newMoviesList = movies as? [Movie], moviesList.count > 0 else { return }
+            guard let newMoviesList = movies as? [Movie], newMoviesList.count > 0
+            else {
+                view.stopActivityIndicator()
+                return
+            }
             page += 1
             moviesList.append(contentsOf: newMoviesList.chunked(into: CHUNK_SIZE))
             view.reloadTable()

@@ -43,11 +43,15 @@ class MoviesListViewController: UIViewController {
 extension MoviesListViewController: MoviesListPresenterToView {
     func reloadTable() {
         moviesTableView.reloadData()
-        setSpinnerVisibility(hidden: true)
+        stopActivityIndicator()
     }
     
     func setError(error: Error) {
         //TODO:- handle error using certain design
+        stopActivityIndicator()
+    }
+    
+    func stopActivityIndicator() {
         setSpinnerVisibility(hidden: true)
     }
     
@@ -68,7 +72,7 @@ extension MoviesListViewController: UITableViewDelegate {
         else {
             return
         }
-        presenter.navigateToMovieDetails(for: indexPath.row, with: image)
+        presenter.navigateToMovieDetails(section: indexPath.section, index: indexPath.row, with: image)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
