@@ -68,12 +68,4 @@ class DBManager {
         try dbConnection.execute("PRAGMA synchronous = OFF")
         try dbConnection.execute("PRAGMA journal_mode = MEMORY")
     }
-    
-    func clearAll() {
-        do {
-            try self.moviesManager.delete()
-        } catch {
-            print("Error Deleting DataBase File")
-        }
-    }
 }
