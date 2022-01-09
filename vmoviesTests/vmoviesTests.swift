@@ -32,10 +32,13 @@ class vmoviesTests: XCTestCase {
         XCTAssertNotNil(inputArr[safe: 50])
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
+    func testSavingImagePerformance() throws {
+        guard let image = R.image.placeholderImage(), let imageData = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
+            return
+        }
+        let imageName: String = "testImage"
         self.measure {
-            // Put the code you want to measure the time of here.
+            LocalStorageManager.shared.saveImage(imageData: imageData, with: imageName)
         }
     }
 
